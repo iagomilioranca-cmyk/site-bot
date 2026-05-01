@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Painel</title>
+<style>
+body {
+background: linear-gradient(to right, #2a0845, #6441a5);
+color: white;
+font-family: Arial;
+padding: 20px;
+}
+.card {
+background:#3b0764;
+padding:15px;
+margin:10px 0;
+border-radius:10px;
+}
+</style>
+</head>
+<body>
+
+<h1>📦 Servidores</h1>
+
+{% for gid, nome in guilds.items() %}
+<div class="card">
+<h3>{{ nome }}</h3>
+
+{% if gid in estoque %}
+    {% for item, qtd in estoque[gid].items() %}
+        <p>{{ item }} - {{ qtd }}</p>
+    {% endfor %}
+{% else %}
+<p>Sem estoque</p>
+{% endif %}
+
+<form action="/add" method="post">
+<input type="hidden" name="guild" value="{{ gid }}">
+<input name="item" placeholder="Item">
+<input name="qtd" placeholder="Qtd">
+<button>Adicionar</button>
+</form>
+
+<form action="/remover" method="post">
+<input type="hidden" name="guild" value="{{ gid }}">
+<input name="item" placeholder="Item">
+<input name="qtd" placeholder="Qtd">
+<button>Remover</button>
+</form>
+
+</div>
+{% endfor %}
+
+<a href="/logout">Sair</a>
+
+</body>
+</html>
