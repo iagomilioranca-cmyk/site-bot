@@ -42,7 +42,7 @@ def login():
     if request.method == "POST":
         if request.form["user"] == USER and request.form["senha"] == PASS:
             session["logado"] = True
-            return redirect("/painel")
+            return redirect("painel")
         else:
             return "❌ Login inválido"
     return render_template("login.html")
