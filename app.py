@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session, jsonify
 import json
 
 app = Flask(__name__)
-app.secret_key = "senha_super_secreta"
+app.secret_key = "qualquer_coisa_forte_123456"
 
 USER = "admin"
 PASS = "12121980"
@@ -43,6 +43,8 @@ def login():
         if request.form["user"] == USER and request.form["senha"] == PASS:
             session["logado"] = True
             return redirect("/painel")
+        else:
+            return "❌ Login inválido"
     return render_template("login.html")
 
 @app.route("/painel")
